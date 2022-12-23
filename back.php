@@ -75,6 +75,7 @@
 					</tbody>
 				</table>
 				<?php 
+				//first no.1 12/23 01:50
 				$do = $_GET['do'] ?? 'main';
 				$file = "./back/" . $do . ".php";
 				if (file_exists($file)) {
