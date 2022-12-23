@@ -14,14 +14,14 @@
 <body>
 	<div id="cover" style="display:none; ">
 		<div id="coverr">
-			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;" onclick="cl(&#39;#cover&#39;)">X</a>
+			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;" onclick="cl('#cover')">X</a>
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
 		<a title="" href="index.php">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div>
+			<div class="ti" style="background:url('use/'); background-size:cover;"></div>
 			<!--標題-->
 		</a>
 		<div id="ms">
@@ -70,13 +70,14 @@
 					<tbody>
 						<tr>
 							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-							<td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+							<td><button onclick="document.cookie='user=';location.replace('?')" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
 						</tr>
 					</tbody>
 				</table>
 				<?php 
 				//first no.1 12/23 01:50
-				$do = $_GET['do'] ?? 'main';
+				$do = $_GET['do'] ?? 'title';//$do=(isset($_GET['do'])?$_GET['do']):'title';僅用於isset判斷
+				
 				$file = "./back/" . $do . ".php";
 				if (file_exists($file)) {
 					include_once $file;
@@ -102,7 +103,7 @@
 						<table style="margin-top:40px; width:70%;">
 							<tbody>
 								<tr>
-									<td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;view.php?do=title&#39;)" value="新增網站標題圖片"></td>
+									<td width="200px"><input type="button" onclick="op('#cover','#cvr','view.php?do=title')" value="新增網站標題圖片"></td>
 									<td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置"></td>
 								</tr>
 							</tbody>
