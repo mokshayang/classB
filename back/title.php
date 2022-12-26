@@ -16,6 +16,7 @@
                 <?php
                     $rows = $Title->all();
                     foreach ($rows as $row) {
+                        $checked=($row['sh']==1)?"checked":"";
                 ?>
                 <tr>
                     <td width="45%">
