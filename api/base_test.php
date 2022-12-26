@@ -29,17 +29,55 @@ class DB
         return $sql;
     }
 
-    function all(){
-        
+    function all(...$args){
+        $sql="select * from $this->table";
+        if(isset($args[0])){
+            if(is_array($args[0])){
+                $tmp=$this->arrayToSqlArray($args[0]);
+                $sql .= " where " .join(" && ",$tmp);
+            }else{
+                $sql .= $args[0];
+            }
+        }
+        if(isset($arg[1])){
+            $sql .= $arg[1];
+        }
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    function find(){
-
+    function find($id){
+        $sql="select * from $this->table";
+        if(is_array($id)){
+            $tmp=$this->arrayToSqlArray($id);
+            $sql .= " where " .join(" && ",$tmp);
+        }else{
+            $sql .= " where `id` =$id";
+        }
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
-    function del(){
-
+    function del($id){
+        $sql="delete from $this->table";
+        if(is_array($id)){
+            $tmp=$this->arrayToSqlArray($id);
+            $sql .= " where " .join(" && ",$tmp);
+        }else{
+            $sql .= " where `id` =$id";
+        }
+        return $this->pdo->exec($sql);
     }
-    function save(){
-
+    function save($array){
+        if(isset($array['id'])){
+            $id=$array['id'];
+            unset($array['id']);
+            $tmp = $this->arrayToSqlArray($array);
+            $sql = "update $this->table set ";
+            $sql .= join(",",$tmp);
+            $sql .= "where `id` =$id";
+        }else{
+            $cols = array_keys($array);
+            $sql = "insert into $this->table (`" . join("`,`",$cols) ."`)
+            values ('" . join("','",$array) ."')";
+        }
+        return $this->pdo->exec($sql);
     }
 
     function count(...$arg){
@@ -73,4 +111,3 @@ function dd($array){
     print_r($array);
     echo "</pre>";
 }
-?>
