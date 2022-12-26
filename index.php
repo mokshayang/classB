@@ -43,7 +43,7 @@
 			if (file_exists($file)) {
 				include_once $file;
 			} else {
-				include_once "./front/home.php";
+				include_once "./front/home.php"; 
 			}
 			
 			?>
