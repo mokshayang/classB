@@ -18,10 +18,12 @@ include_once "./api/base_test.php";
 	<div id="cover" style="display:none; ">
 		<div id="coverr">
 			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;" onclick="cl('#cover')">X</a>
-			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"><h2>新增表單</h2></div>
+			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;">
+				<h2>新增表單</h2>
+			</div>
 		</div>
 	</div>
-	
+
 	<div id="main">
 		<a title="" href="index.php">
 			<div class="ti" style="background:url('use/'); background-size:cover;"></div>
@@ -77,17 +79,17 @@ include_once "./api/base_test.php";
 						</tr>
 					</tbody>
 				</table>
-				<?php 
+				<?php
 				//first no.1 12/23 01:50
-				$do = $_GET['do'] ?? 'title';//$do=(isset($_GET['do'])?$_GET['do']):'title';僅用於isset判斷
-				
+				$do = $_GET['do'] ?? 'title'; //$do=(isset($_GET['do'])?$_GET['do']):'title';僅用於isset判斷
+
 				$file = "./back/" . $do . ".php";
 				if (file_exists($file)) {
 					include_once $file;
 				} else {
 					include_once "./back/title.php";
 				}
-			
+
 				?>
 				<!-- 下方 為back/ad.php -->
 				<!-- <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
@@ -136,7 +138,7 @@ include_once "./api/base_test.php";
 		<div style="clear:both;"></div>
 		<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
 			<span class="t" style="line-height:123px;">
-			<?= $Bottom->find(1)['bottom'];?></span>
+				<?= $Bottom->find(1)['bottom']; ?></span>
 		</div>
 	</div>
 
