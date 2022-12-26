@@ -24,7 +24,7 @@
                         <input type="checkbox" name="del" id="">
                     </td>
                     <td>
-                        <input type="text" name="" id="">
+                        <input type="button" value="更新圖片">
                     </td>
                 </tr>
             </tbody>
