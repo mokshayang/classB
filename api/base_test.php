@@ -136,3 +136,13 @@ function dd($array)
     print_r($array);
     echo "</pre>";
 }
+function to($location)
+{
+    header("location:" . $location);
+}
+function q($sql)
+{
+    $dsn = "mysql:host=localhost;charset=utf8;dbname=db15";
+    $pdo = new PDO($dsn, 'root', '');
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
