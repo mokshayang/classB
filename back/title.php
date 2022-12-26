@@ -26,7 +26,7 @@
                             <input type="text" name="text[]" value="<?= $row['text']; ?>">
                         </td>
                         <td width="7%">
-                            <input type="radio" name="sh" value="<?= $row['id']; ?>" <?=$checked?> >
+                            <input type="radio" name="sh" value="<?= $row['id']; ?>" <?= $checked ?>>
                         </td>
                         <td width="7%">
                             <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
@@ -45,7 +45,10 @@
                 <tr>
                     <td width="200px"><input type="button" onclick="op('#cover','#cvr','./modal/title.php')" value="新增網站標題圖片">
                     </td>
-                    <td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置"></td>
+                    <td class="cent">
+                        <input type="submit" value="修改確定">
+                        <input type="reset" value="重置">
+                    </td>
                 </tr>
             </tbody>
         </table>
