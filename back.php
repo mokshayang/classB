@@ -84,6 +84,7 @@
 				} else {
 					include_once "./back/title.php";
 				}
+			
 				?>
 				<!-- 下方 為back/ad.php -->
 				<!-- <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
