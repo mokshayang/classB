@@ -21,19 +21,19 @@ class DB
         return $tmp;
     }
 
-    function mathSql($math, $col, ...$arg)
+    function mathSql($math, $col, ...$args)
     {
         $sql = "select $math($col) from $this->table";
-        if (isset($arg[0])) {
-            if (is_array($arg[0])) {
-                $tmp = $this->arrayToSqlArray($arg[0]);
+        if (isset($args[0])) {
+            if (is_array($args[0])) {
+                $tmp = $this->arrayToSqlArray($args[0]);
                 $sql .= " where " . join(" && ", $tmp);
             } else {
-                $sql .= $arg[0];
+                $sql .= $args[0];
             }
         }
-        if (isset($arg[1])) {
-            $sql .= $arg[1];
+        if (isset($args[1])) {
+            $sql .= $args[1];
         }
         return $sql;
     }
@@ -49,8 +49,8 @@ class DB
                 $sql .= $args[0];
             }
         }
-        if (isset($arg[1])) {
-            $sql .= $arg[1];
+        if (isset($args[1])) {
+            $sql .= $args[1];
         }
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -126,7 +126,7 @@ class DB
 }
 $test = new DB('bottom');
 // $math = $test->avg('id', ['id'=>2]," order by id" );
-$math = $test->count( ['bottom'=>'test'] );
+$math = $test->max('id',['bottom' => 'test'], "in(2,3)");
 dd($math);
 function dd($array)
 {
