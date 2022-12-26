@@ -124,10 +124,11 @@ class DB
         return $this->pdo->query($sql)->fetchColumn();
     }
 }
-$test = new DB('bottom');
-// $math = $test->avg('id', ['id'=>2]," order by id" );
-$math = $test->max('id',['bottom' => 'test'], "in(2,3)");
-dd($math);
+// $test = new DB('bottom');
+// // $math = $test->avg('id', ['id'=>2]," order by id" );
+// $math = $test->max('id',['bottom' => 'test'], "in(2,3)");
+// dd($math);
+$Bottom=new DB('bottom');
 function dd($array)
 {
     echo "<pre>";
