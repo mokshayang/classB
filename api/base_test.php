@@ -129,6 +129,7 @@ class DB
 // $math = $test->max('id',['bottom' => 'test'], "in(2,3)");
 // dd($math);
 $Bottom=new DB('bottom');
+$Title=new DB('title');
 function dd($array)
 {
     echo "<pre>";
