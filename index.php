@@ -1,4 +1,4 @@
-<?php include_once "api/base.php" ?>
+<?php include_once "./api/base.php"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0040)http://127.0.0.1/test/exercise/collage/? -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -7,9 +7,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<title>卓越科技大學校園資訊系統</title>
-	<link href="css/css.css" rel="stylesheet" type="text/css">
-	<script src="js/jquery-1.9.1.min.js"></script>
-	<script src="js/js.js"></script>
+	<link href="./css/css.css" rel="stylesheet" type="text/css">
+	<script src="./js/jquery-1.9.1.min.js"></script>
+	<script src="./js/js.js"></script>
 </head>
 
 <body>
@@ -37,16 +37,16 @@
 				</div>
 			</div>
 			<?php
-				$do = $_GET['do'] ?? "home";
-				$file = "front/" . $do . ".php";
+				$do = ($_GET['do'])?? "home";
+				$file = "./front/" . $do . ".php";
 				if(file_exists($file)){
 					include_once $file;
 				}else{
-					include_once "front/home.php";
+					include_once "./front/home.php";
 				}
+
 			?>
-			<div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">
-			</div>
+			<div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
 			<script>
 				$(".sswww").hover(
 					function() {

@@ -1,7 +1,6 @@
 <?php
 session_start();
 date_default_timezone_set("Asia/Taipei");
-
 class DB
 {
     protected $table;
@@ -9,137 +8,160 @@ class DB
     protected $pdo;
     function __construct($table)
     {
-       
-        $this->pdo = new PDO($this->dsn,'root','');
+        $this->pdo = new PDO($this->dsn, 'root', '');
         $this->table = $table;
     }
-    private function arrayToSqlArray($array){
+
+    private function arrayToSqlArray($array)
+    {
         foreach ($array as $key => $value) {
             $tmp[] = "`$key`='$value'";
         }
         return $tmp;
     }
-    function math($math,$col,...$arg){
-        $sql = "select  $math($col) from $this->table ";
-        if(isset($arg[0])){
-            if(is_array($arg[0])){
-                $tmp = $this->arrayToSqlArray($arg[0]);
-                $sql .=" where " . join(" && ",$tmp);
-            }else{
-                $sql .= $arg[0] ;
+
+    function mathSql($math, $col, ...$args)
+    {
+        $sql = "select $math($col) from $this->table";
+        if (isset($args[0])) {
+            if (is_array($args[0])) {
+                $tmp = $this->arrayToSqlArray($args[0]);
+                $sql .= " where " . join(" && ", $tmp);
+            } else {
+                $sql .= $args[0];
             }
         }
-        if(isset($arg[1])){
-            $sql .= $arg[1];
+        if (isset($args[1])) {
+            $sql .= $args[1];
         }
         return $sql;
     }
-    function all(...$arg){
+
+    function all(...$args)
+    {
         $sql = "select * from $this->table ";
-        if(isset($arg[0])){
-            if(is_array($arg[0])){
-                $tmp = $this->arrayToSqlArray($arg[0]);
-                $sql .= " where " . join(" && ",$tmp);
-            }else{
-                $sql .= $arg[0] ;
+        if (isset($args[0])) {
+            if (is_array($args[0])) {
+                $tmp = $this->arrayToSqlArray($args[0]);
+                $sql .= " where " . join(" && ", $tmp);
+            } else {
+                $sql .= $args[0];
             }
         }
-        if(isset($arg[1])){
-            $sql .= $arg[1];
+        if (isset($args[1])) {
+            $sql .= $args[1];
         }
-        
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    function find($id){
+    function find($id)
+    {
         $sql = "select * from $this->table ";
-        if(is_array($id)){
+        if (is_array($id)) {
             $tmp = $this->arrayToSqlArray($id);
-            $sql .=" where" . join(" && ",$tmp);
-        }else{
-            $sql .= " where `id` = $id ";
+            $sql .= " where " . join(" && ", $tmp);
+        } else {
+            $sql .= " where `id` =$id";
         }
-        
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
-    function del($id){
-        $sql = "delete from $this->table ";
-        if(is_array($id)){
+    function del($id)
+    {
+        $sql = "delete from $this->table";
+        if (is_array($id)) {
             $tmp = $this->arrayToSqlArray($id);
-            $sql .=" where" . join(" && ",$tmp);
-        }else{
-            $sql .= " where `id` = $id ";
+            $sql .= " where " . join(" && ", $tmp);
+        } else {
+            $sql .= " where `id` =$id";
         }
         return $this->pdo->exec($sql);
     }
-    function save($array){
-        if(isset($array['id'])){
+    function save($array)
+    {
+        if (isset($array['id'])) {
             $id = $array['id'];
             unset($array['id']);
             $tmp = $this->arrayToSqlArray($array);
             $sql = "update $this->table set ";
-            $sql .= join(" , ",$tmp);
-            $sql .= " where `id` = $id ";
-        }else{
-            $col=array_keys($array);
-            $sql = "insert into $this->table (`".join("` , `",$col )."`)
-            values ('".join("' , '",$array )."')";
+            $sql .= join(",", $tmp);
+            $sql .= " where `id` =$id";
+        } else {
+            $cols = array_keys($array);
+            $sql = "insert into $this->table (`" . join("`,`", $cols) . "`)
+            values ('" . join("','", $array) . "')";
         }
-        
         return $this->pdo->exec($sql);
-
-    }
-    function count(...$arg){
-        $sql = $this->math("count","*",...$arg);
-        
-        return $this->pdo->query($sql)->fetchcolumn();
-    }
-    function sum($col,...$arg){
-        $sql = $this->math("sum",$col,...$arg);
-        
-        return $this->pdo->query($sql)->fetchcolumn();
-    }
-    function min($col,...$arg){
-        $sql = $this->math("min",$col,...$arg);
-        
-        return $this->pdo->query($sql)->fetchcolumn();
-    }
-    function max($col,...$arg){
-        $sql = $this->math("max",$col,...$arg);
-        
-        return $this->pdo->query($sql)->fetchcolumn();
-    }
-    function avg($col,...$arg){
-        $sql = $this->math("avg",$col,...$arg);
-        
-        return $this->pdo->query($sql)->fetchcolumn();
     }
 
+    function count(...$arg)
+    {
+        $sql = $this->mathSql("count", "*", ...$arg);
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+    function min($col, ...$arg)
+    {
+        $sql = $this->mathSql("min", $col, ...$arg);
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+    function max($col, ...$arg)
+    {
+        $sql = $this->mathSql("max", $col, ...$arg);
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+    function sum($col, ...$arg)
+    {
+        $sql = $this->mathSql("sum", $col, ...$arg);
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+    function avg($col, ...$arg)
+    {
+        $sql = $this->mathSql("avg", $col, ...$arg);
+        return $this->pdo->query($sql)->fetchColumn();
+    }
 }
-function dd($array){
+// $test = new DB('bottom');
+// // $math = $test->avg('id', ['id'=>2]," order by id" );
+// $math = $test->max('id',['bottom' => 'test'], "in(2,3)");
+// dd($math);
+
+// switch($_POST['table']){
+//     case "Title";
+//     $db=new DB("title");
+//     break;
+// }
+
+// dd(${$_POST['table']});
+
+$Bottom=new DB('bottom');
+$Title=new DB('title');
+$Ad=new DB('ad');
+$Mvim=new DB('mvim');
+$Image=new DB('image');
+$Admin=new DB('admin');
+$News=new DB('news');
+$Menu=new DB('menu');
+$Total=new DB('total');
+$total=$Total->find(1);
+$bottom=$Bottom->find(1);
+function dd($array)
+{
     echo "<pre>";
     print_r($array);
     echo "</pre>";
 }
 function to($url){
-    header("location:".$url);
+   header("location:".$url);
 }
-$Ad =new DB('ad');
-$Admin =new DB('admin');
-$Bottom =new DB('bottom');
-$Total =new DB('total');
-$Title =new DB('title');
-$News =new DB('news');
-$Mvim =new DB('mvim');
-$Image =new DB('image');
-$Menu =new DB('menu');
-$total = $Total->find(1);
-$bottom = $Bottom->find(1);
-
-if(!isset($_SESSION['visit'])){
+// if(!isset($_SESSION['visit']) && isset($_SESSION['login'])){
+//     $_SESSION['visit']=1;
+//     $total=$Total->find(1);
+//     $total['total']++;
+//     $Total->save($total);
+// }
+if(!isset($_SESSION['visit']) ){
     $_SESSION['visit']=1;
+    $total=$Total->find(1);
     $total['total']++;
     $Total->save($total);
 }
-// dd($total);
-// echo $bottom['bottom'];
-// dd(($Bottom->avg("id")));
+// $a=$Image->all("limit 0,10");
+// dd($a);

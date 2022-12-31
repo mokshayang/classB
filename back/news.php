@@ -1,6 +1,6 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-    <p class="t cent botli">最新消息</p>
-    <form method="post" action="./api/edit.php">
+    <p class="t cent botli">網站標題管理</p>
+    <form method="post"  action="./api/edit.php">
         <table width="100%">
             <tbody>
                 <tr class="yel">
@@ -13,22 +13,23 @@
                 <?php
                 $rows = $Title->all();
                 foreach ($rows as $row) {
+                    $checked = ($row['sh'] == 1) ? "checked" : "";
                 ?>
                     <tr>
                         <td>
-                            <img src="./upload" <?= $row['img'] ?> alt="" style="width: 300px; height: 30px;">
+                            <img src="./upload/<?= $row['img'] ?>" style="width: 300px;height: 30px;" alt="">
                         </td>
                         <td>
                             <input type="text" name="text[]" value="<?= $row['text'] ?>">
                         </td>
                         <td>
-                            <input type="checkbox" name="sh[]" value="<?= $row['id'] ?>">
+                            <input type="checkbox" name="sh[]" value="<?= $row['id'] ?>" <?=$checked?>>
                         </td>
                         <td>
                             <input type="checkbox" name="del[]" value="<?= $row['id'] ?>">
                         </td>
                         <td>
-                            <input type="text" name="id[]"  value="<?= $row['id'] ?>">
+                            <input type="hidden" name="id[]" value="<? $row['id'] ?>">
                         </td>
                     </tr>
                 <?php } ?>

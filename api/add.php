@@ -1,4 +1,5 @@
-<?php include_once "base.php";
+<?php 
+include_once "base.php";
 $table = $_POST['table'];
 $data = [];
 if (!empty($_FILES['img']['tmp_name'])) {
@@ -6,11 +7,11 @@ if (!empty($_FILES['img']['tmp_name'])) {
     $data['img'] = $_FILES['img']['name'];
 }
 switch ($table) {
-    case 'Admin':
+    case "Admin":
         $data['acc'] = $_POST['acc'];
         $data['pw'] = $_POST['pw'];
         break;
-    case 'Menu':
+    case "Menu":
         $data['name'] = $_POST['name'];
         $data['href'] = $_POST['href'];
         $data['sh'] = 1;
@@ -23,5 +24,4 @@ switch ($table) {
         $data['sh'] = ($table == "Title") ? 0 : 1;
 }
 $$table->save($data);
-
-to("../admin.php?do=".lcfirst($table));
+// to("../admin.php?do=".lcfirst($table));
