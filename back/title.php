@@ -13,23 +13,24 @@
                 <?php
                 $rows = $Title->all();
                 foreach ($rows as $row) {
+                    $checked = ($row['sh']==1)?"checked":"";
                 ?>
                     <tr>
                         <td>
-                            <img src="./upload" <?= $row['img'] ?> alt="" style="width: 300px; height: 30px;">
+                            <img src="./upload/<?= $row['img'] ?>" alt="" style="width: 300px; height: 30px;">
                         </td>
                         <td>
                             <input type="text" name="text[]" value="<?= $row['text'] ?>">
                         </td>
                         <td>
-                            <input type="radio" name="sh" value="<?= $row['id'] ?>">
+                            <input type="radio" name="sh" value="<?= $row['id'] ?>" <?=$checked?>>
                         </td>
                         <td>
                             <input type="checkbox" name="del[]" value="<?= $row['id'] ?>">
                         </td>
                         <td>
-                            <input type="button" value="更新圖片" onclick="op('#cover','#cvr','./modal/renew_title.php')">
-                            <input type="text" name="id[]"  value="<?= $row['id'] ?>">
+                            <input type="button" value="更新圖片" onclick="op('#cover','#cvr','./modal/renew_title.php?id=<?=$row['id']?>')">
+                            <input type="hidden" name="id[]"  value="<?= $row['id'] ?>">
                         </td>
                     </tr>
                 <?php } ?>
