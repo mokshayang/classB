@@ -29,4 +29,3 @@ if (isset($_POST['add_name'])) {
 }
 
 
-to("../admin.php?do=".lcfirst($table));
