@@ -29,7 +29,33 @@
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
+
+					<?php
+					//主選單開始 :
+					$main = $Menu->all(['sh' => 1, 'parent' => 0]);
+					foreach ($main as $ma) {
+						echo "<div class='mainmu cent'>";
+						echo "<a href='{$ma['href']}'>{$ma['name']}</a>";
+					//上方主選單完成
+
+						$chk = $Menu->count(['parent' => $ma['id']]);
+						if ($chk > 0) {
+							$sub = $Menu->all(['parent' => $ma['id']]);
+
+							echo "<div class='mw'>";
+							foreach ($sub as $su) {
+								echo "<div class='mainmu2 cent'>";
+								echo "<a href='{$su['href']}'>{$su['name']}</a>";
+								echo "</div>"; //maimnmu2 end
+							}
+							echo "</div>"; //mw end
+						}
+						echo "</div>"; //mainmu end
+					}
+					?>
+
 				</div>
+
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 : <?= $total['total'] ?></span>
 					</span>
@@ -48,7 +74,7 @@
 			<script>
 				$(".sswww").hover(
 					function() {
-						$("#alt").html("" + $(this).children(".all").html() + "").css({
+						$("#alt").html("<pre>" + $(this).children(".all").html() + "</pre>").css({
 							"top": $(this).offset().top - 50
 						})
 						$("#alt").show()
@@ -69,16 +95,39 @@
 				<?php } ?>
 				<div style="width:89%; height:480px;" class="dbor">
 					<span class="t botli">校園映象區</span>
+					<!-- 映像開始 在 上下箭頭之間 -->
+					<div class="cent" onclick="pp(1)" style="margin: top 5px;"><img src="icon/up.jpg"></div>
+					<style>
+						.cent .ii {
+							width: 150px;
+							height: 103px;
+							border: 3px solid orange;
+							margin:5px auto;
+						}
+					</style>
+
+					<?php
+					$img = $Image->all(['sh' => 1]);
+					$hm = count($img); //共幾張 
+					foreach ($img as $id => $v) {
+					?>
+						<div class="cent im" id="ssaa<?= $id ?>">
+							<img src="upload/<?= $v['img'] ?>" class="ii" alt="">
+						</div>
+
+					<?php } ?>
+					
+					<div class="cent" onclick="pp(2)"><img src="icon/dn.jpg"></div>
+
 					<script>
 						var nowpage = 0,
-							num = 0;
-
+							num = <?=$hm?>;
 						function pp(x) {
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) {
 								nowpage--;
 							}
-							if (x == 2 && (nowpage + 1) * 3 <= num * 1 + 3) {
+							if (x == 2 && (nowpage + 1) <= num - 3 ) {
 								nowpage++;
 							}
 							$(".im").hide()
