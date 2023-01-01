@@ -1,35 +1,31 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-    <p class="t cent botli">網站標題管理</p>
+    <p class="t cent botli">動畫圖片管理</p>
     <form method="post" action="./api/edit.php">
-        <table width="100%">
+        <table width="100%" class="cent">
             <tbody>
                 <tr class="yel">
-                    <td width="45%">網站標題</td>
-                    <td width="23%">替代文字</td>
-                    <td width="7%">顯示</td>
-                    <td width="7%">刪除</td>
+                    <td width="70%">動畫圖片</td>
+                    <td width="10%">顯示</td>
+                    <td width="10%">刪除</td>
                     <td></td>
                 </tr>
                 <?php
-                    $rows = $Title->all();
+                    $rows = $Mvim->all();
                     foreach($rows as $row){
                     $checked = ($row['sh']==1)?"checked":"";
                 ?>
                 <tr>
                     <td>
-                        <img src="./upload/<?=$row['img']?>" style="width: 300px; height: 30px;" alt="">
+                        <img src="./upload/<?=$row['img']?>" style="width: 150px; height: 103px;" alt="">
                     </td>
                     <td>
-                        <input type="text" name="text[]" value="<?=$row['text']?>">
-                    </td>
-                    <td>
-                        <input type="radio" name="sh" value="<?=$row['id']?>" <?=$checked?>>
+                        <input type="checkbox" name="sh[]" value="<?=$row['id']?>" <?=$checked?>>
                     </td>
                     <td>
                         <input type="checkbox" name="del[]" value="<?=$row['id']?>">
                     </td>
                     <td>
-                        <input type="button" value="更換圖片"  onclick="op('#cover','#cvr','./modal/renew_title.php?id=<?=$row['id']?>')">
+                        <input type="button" value="更換圖片"  onclick="op('#cover','#cvr','./modal/renew_mvim.php?id=<?=$row['id']?>')">
                         <input type="hidden" name="id[]" value="<?=$row['id']?>">
                     </td>
                 </tr>
@@ -40,10 +36,10 @@
             <tbody>
                 <tr>
                     <td width="200px">
-                        <input type="button" onclick="op('#cover','#cvr','modal/title.php')" value="新增網站標題圖片">
+                        <input type="button" onclick="op('#cover','#cvr','modal/mvim.php')" value="新增動畫圖片">
                     </td>
                     <td class="cent">
-                        <input type="hidden" name="table" value="Title">
+                        <input type="hidden" name="table" value="Mvim">
                         <input type="submit" value="修改確定">
                         <input type="reset" value="重置">
                     </td>

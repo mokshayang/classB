@@ -62,6 +62,7 @@ class DB
         } else {
             $sql .= " where `id` =$id";
         }
+        
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
     function del($id)
@@ -89,6 +90,7 @@ class DB
             $sql = "insert into $this->table (`" . join("`,`", $cols) . "`)
             values ('" . join("','", $array) . "')";
         }
+dd($sql);
         return $this->pdo->exec($sql);
     }
 

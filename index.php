@@ -19,7 +19,6 @@
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
-	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
 		<a title="" href="./home_files/home.htm">
 			<div class="ti" style="background:url('use/'); background-size:cover;"></div>
@@ -37,8 +36,8 @@
 				</div>
 			</div>
 			<?php
-				$do = ($_GET['do'])??"home";
-				$file="./front" . $do . ".php";
+				$do = $_GET['do']??"home";
+				$file="./front/" . $do . ".php";
 				if(file_exists($file)){
 					include_once $file;
 				}else{
