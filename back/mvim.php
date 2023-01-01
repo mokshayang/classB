@@ -10,28 +10,55 @@
                     <td></td>
                 </tr>
                 <?php
-                    $rows = $Mvim->all();
-                    foreach($rows as $row){
-                    $checked = ($row['sh']==1)?"checked":"";
+                $tt = $Mvim->count();
+                $num = 3;
+                $pages = ceil($tt / $num);
+                $now = $_GET['p'] ?? 1;
+                $start = ($now - 1) * $num;
+                $rows = $Mvim->all(" limit $start,$num ");
+                foreach ($rows as $row) {
+                    $checked = ($row['sh'] == 1) ? "checked" : "";
                 ?>
-                <tr>
-                    <td>
-                        <img src="./upload/<?=$row['img']?>" style="width: 150px; height: 103px;" alt="">
-                    </td>
-                    <td>
-                        <input type="checkbox" name="sh[]" value="<?=$row['id']?>" <?=$checked?>>
-                    </td>
-                    <td>
-                        <input type="checkbox" name="del[]" value="<?=$row['id']?>">
-                    </td>
-                    <td>
-                        <input type="button" value="更換圖片"  onclick="op('#cover','#cvr','./modal/renew_mvim.php?id=<?=$row['id']?>')">
-                        <input type="hidden" name="id[]" value="<?=$row['id']?>">
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <img src="./upload/<?= $row['img'] ?>" style="width: 150px; height: 103px;" alt="">
+                        </td>
+                        <td>
+                            <input type="checkbox" name="sh[]" value="<?= $row['id'] ?>" <?= $checked ?>>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="del[]" value="<?= $row['id'] ?>">
+                        </td>
+                        <td>
+                            <input type="button" value="更換圖片" onclick="op('#cover','#cvr','./modal/renew_mvim.php?id=<?= $row['id'] ?>')">
+                            <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
+                        </td>
+                    </tr>
                 <?php } ?>
             </tbody>
         </table>
+        <style>
+            .cent a{
+                text-decoration: none;
+            }
+        </style>
+        <div class="cent">
+            <?php
+            if(($now-1)>0){
+                echo "<a href='?do=$do&p=".($now-1)."'>";
+                echo " < </a>";
+            }
+            for($i=1;$i<=$pages;$i++){
+                $size = ($now==$i)?"24px":"20px";
+                echo "<a href='?do=$do&p=$i' style='font-size:$size;'>";
+                echo " &nbsp; $i &nbsp; </a>";
+            }
+            if(($now+1)<=$pages){
+                echo "<a href='?do=$do&p=".($now+1)."'>";
+                echo " > </a>";
+            }
+            ?>
+        </div>
         <table style="margin-top:40px; width:70%;">
             <tbody>
                 <tr>

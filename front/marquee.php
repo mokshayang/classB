@@ -1,3 +1,9 @@
-<marquee scrolldelay="120" direction="left" scrollamount="15" style="position:absolute; width:100%; height:40px;">
-重新練習切版中!!
+<marquee scrolldelay="120" direction="left" scrollamount="20" style="position:absolute; width:100%; height:40px;">
+    <?php
+    $ads = $Ad->all(['sh' => 1]);
+    foreach ($ads as $ad) {
+        echo $ad['text'];
+        echo "&nbsp;&nbsp;&nbsp;";
+    }
+    ?>
 </marquee>

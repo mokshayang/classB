@@ -10,7 +10,12 @@
                     <td></td>
                 </tr>
                 <?php
-                    $rows = $Image->all();
+                    $tt=$Image->count();
+                    $num=4;
+                    $pages=ceil($tt/$num);
+                    $now = $_GET['p']??1;
+                    $start=($now-1)*$num;
+                    $rows = $Image->all(" limit $start,$num ");
                     foreach($rows as $row){
                     $checked = ($row['sh']==1)?"checked":"";
                 ?>
@@ -32,7 +37,29 @@
                 <?php } ?>
             </tbody>
         </table>
-        <table style="margin-top:40px; width:70%;">
+        <style>
+            .cent a{
+                text-decoration: none;
+            }
+        </style>
+        <div class="cent">
+            <?php
+            if(($now-1)>0){
+                echo "<a href='?do=$do&p=".($now-1)."'>";
+                echo " < </a>";
+            }
+            for($i=1;$i<=$pages;$i++){
+                $size = ($now==$i)?"24px":"20px";
+                echo "<a href='?do=$do&p=$i' style='font-size:$size;'>";
+                echo " &nbsp; $i &nbsp; </a>";
+            }
+            if(($now+1)<=$pages){
+                echo "<a href='?do=$do&p=".($now+1)."'>";
+                echo " > </a>";
+            }
+            ?>
+        </div>
+        <table style="margin-top:10px; width:70%;">
             <tbody>
                 <tr>
                     <td width="200px">

@@ -10,28 +10,55 @@
                     <td></td>
                 </tr>
                 <?php
-                    $rows = $News->all();
-                    foreach($rows as $row){
-                    $checked = ($row['sh']==1)?"checked":"";
+                $tt = $News->count();
+                $num = 4;
+                $pages = ceil($tt / $num);
+                $now = $_GET['p'] ?? 1;
+                $start = ($now - 1) * $num;
+                $rows = $News->all("limit $start,$num");
+                foreach ($rows as $row) {
+                    $checked = ($row['sh'] == 1) ? "checked" : "";
                 ?>
-                <tr>
-                    <td>
-                        <input type="text" name="text[]" value="<?=$row['text']?>" style="width:95%">
-                    </td>
-                    <td>
-                        <input type="checkbox" name="sh[]" value="<?=$row['id']?>" <?=$checked?>>
-                    </td>
-                    <td>
-                        <input type="checkbox" name="del[]" value="<?=$row['id']?>">
-                    </td>
-                    <td>
-                        <input type="hidden" name="id[]" value="<?=$row['id']?>">
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <textarea type="text" name="text[]" style="width:99%;height:62px;"><?= $row['text'] ?></textarea>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="sh[]" value="<?= $row['id'] ?>" <?= $checked ?>>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="del[]" value="<?= $row['id'] ?>">
+                        </td>
+                        <td>
+                            <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
+                        </td>
+                    </tr>
                 <?php } ?>
             </tbody>
         </table>
-        <table style="margin-top:40px; width:70%;">
+        <style>
+            .cent a {
+                text-decoration: none;
+            }
+        </style>
+        <div class="cent">
+            <?php
+            if (($now - 1) > 0) {
+                echo "<a href='?do=$do&p=" . ($now - 1) . "'>";
+                echo " < </a>";
+            }
+            for ($i = 1; $i <= $pages; $i++) {
+                $size = ($now == $i) ? "24px" : "20px";
+                echo "<a href='?do=$do&p=$i' style='font-size:$size;'>";
+                echo " &nbsp; $i &nbsp; </a>";
+            }
+            if (($now + 1) <= $pages) {
+                echo "<a href='?do=$do&p=" . ($now + 1) . "'>";
+                echo " > </a>";
+            }
+            ?>
+        </div>
+        <table style="margin-top:10px; width:70%;">
             <tbody>
                 <tr>
                     <td width="200px">

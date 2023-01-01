@@ -30,6 +30,9 @@
                         <?=$Menu->count(['parent'=>$row['id']])?>
                     </td>
                     <td>
+                        <input type="checkbox" name="sh[]" value="<?=$row['id']?>" <?= $checked ?> >
+                    </td>
+                    <td>
                         <input type="checkbox" name="del[]" value="<?=$row['id']?>">
                     </td>
                     <td>

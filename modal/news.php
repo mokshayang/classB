@@ -5,7 +5,7 @@
         <tr>
             <td>最新消息 : </td>
             <td>
-                <input type="text" name="text" >
+                <textarea name="text" cols="50" rows="15"></textarea>
             </td>
         </tr>
     </table>

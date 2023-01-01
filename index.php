@@ -20,8 +20,8 @@
 		</div>
 	</div>
 	<div id="main">
-		<a title="" href="./home_files/home.htm">
-			<div class="ti" style="background:url('use/'); background-size:cover;"></div>
+		<a title="<?= $Title->find(['sh' => 1])['text'] ?>" href="index.php">
+			<div class="ti" style="background:url('upload/<?= $Title->find(['sh' => 1])['img'] ?>'); background-size:cover;"></div>
 			<!--標題-->
 		</a>
 		<div id="ms">
@@ -31,18 +31,18 @@
 					<span class="t botli">主選單區</span>
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
-					<span class="t">進站總人數 : <?=$total['total']?></span>
-						</span>
+					<span class="t">進站總人數 : <?= $total['total'] ?></span>
+					</span>
 				</div>
 			</div>
 			<?php
-				$do = $_GET['do']??"home";
-				$file="./front/" . $do . ".php";
-				if(file_exists($file)){
-					include_once $file;
-				}else{
-					include_once "./front/home.php";
-				}
+			$do = $_GET['do'] ?? "home";
+			$file = "./front/" . $do . ".php";
+			if (file_exists($file)) {
+				include_once $file;
+			} else {
+				include_once "./front/home.php";
+			}
 			?>
 			<div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
 			<script>
@@ -62,7 +62,11 @@
 			</script>
 			<div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
 				<!--右邊-->
-				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo('?do=admin')">管理登入</button>
+				<?php if (empty($_SESSION['login'])) { ?>
+					<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo('?do=login')">管理登入</button>
+				<?php } else { ?>
+					<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo('admin.php')">返回管理</button>
+				<?php } ?>
 				<div style="width:89%; height:480px;" class="dbor">
 					<span class="t botli">校園映象區</span>
 					<script>
@@ -90,7 +94,7 @@
 		</div>
 		<div style="clear:both;"></div>
 		<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;"><?=$bottom['bottom']?></span>
+			<span class="t" style="line-height:123px;"><?= $bottom['bottom'] ?></span>
 		</div>
 	</div>
 

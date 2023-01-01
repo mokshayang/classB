@@ -6,7 +6,7 @@
                 <tr class="yel">
                     <td width="50%">進站總人數</td>
                     <td width="50%">
-                        <input type="text" name="total" value="<?=$total['total']?>">
+                        <input  style="width:90%;" type="number" name="total" value="<?=$total['total']?>">
                     </td>
                 </tr>
               

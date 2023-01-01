@@ -4,8 +4,8 @@
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="45%">網站標題</td>
-                    <td width="45%">替代文字</td>
+                    <td width="45%">管理裡帳號</td>
+                    <td width="45%">管理裡密碼</td>
                     <td width="10%">刪除</td>
                     <td></td>
                 </tr>
@@ -16,7 +16,7 @@
                 <tr>
                     <td>
                         <input type="text" name="acc[]" value="<?=$row['acc']?>">
-                    </td>
+                    </td >
                     <td>
                         <input type="number" name="pw[]" value="<?=$row['pw']?>">
                     </td>

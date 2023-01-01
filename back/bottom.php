@@ -6,7 +6,7 @@
                 <tr class="yel">
                     <td width="50%">頁尾版權資料</td>
                     <td width="50%">
-                        <input type="text" name="bottom" value="<?=$bottom['bottom']?>">
+                        <input  style="width:90%;" type="text" name="bottom" value="<?=$bottom['bottom']?>">
                     </td>
                 </tr>
               
