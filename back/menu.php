@@ -1,6 +1,6 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
     <p class="t cent botli">選單管理</p>
-    <form method="post" target="back" action="./api/edit.php">
+    <form method="post" action="./api/edit.php">
         <table width="100%">
             <tbody>
                 <tr class="yel">

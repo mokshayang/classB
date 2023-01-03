@@ -23,4 +23,4 @@ switch($table){
     $tmp['sh']=($table=="Title")?0:1;
 }
 $$table->save($tmp);
-to("../admon.php?do=".lcfirst($table));
+to("../admin.php?do=".lcfirst($table));
