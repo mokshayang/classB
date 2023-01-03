@@ -1,35 +1,37 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-    <p class="t cent botli">網站標題管理</p>
+    <p class="t cent botli">選單管理</p>
     <form method="post" target="back" action="./api/edit.php">
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="45%">網站標題</td>
-                    <td width="23%">替代文字</td>
-                    <td width="7%">顯示</td>
-                    <td width="7%">刪除</td>
+                    <td width="30%">主選單名稱</td>
+                    <td width="30%">選單聯結網址</td>
+                    <td width="10%">次選單數</td>
+                    <td width="10%">顯示</td>
+                    <td width="10%">刪除</td>
                     <td></td>
                 </tr>
                 <?php
-                $rows = $Title->all();
+                $rows = $Menu->all(['parent'=>0]);
                 foreach ($rows as $row) {
                     $checked = ($row['sh'] == 1) ? "checked" : "";
                 ?>
                     <tr>
                         <td>
-                            <img src="./upload/<?= $row['img'] ?>" alt="" style="width: 300px;height: 30px;">
+                            <input type="text" name="name[]" value="<?= $row['name'] ?>">
                         </td>
                         <td>
-                            <input type="text" name="text[]" value="<?= $row['text'] ?>">
+                            <input type="text" name="href[]" value="<?= $row['href'] ?>">
                         </td>
+                        <td><?=$Menu->count(['parent'=>$row['id']])?></td>
                         <td>
-                            <input type="checkbox" name="sh" value="<?= $row['id'] ?>" <?= $checked ?>>
+                            <input type="checkbox" name="sh[]" value="<?= $row['id'] ?>" <?= $checked ?>>
                         </td>
                         <td>
                             <input type="checkbox" name="del[]" value="<?= $row['id'] ?>">
                         </td>
                         <td>
-                            <input type="button" value="更新圖片" onclick="op('#cover','#cvr','./modal/renew_title.php?id=<?= $row['id'] ?>')">
+                            <input type="button" value="編輯次選單" onclick="op('#cover','#cvr','./modal/options.php?id=<?= $row['id'] ?>')">
                             <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
                         </td>
                     </tr>
@@ -40,10 +42,10 @@
             <tbody>
                 <tr>
                     <td width="200px">
-                        <input type="button" onclick="op('#cover','#cvr','./modal/title.php')" value="新增網站標題圖片">
+                        <input type="button" onclick="op('#cover','#cvr','./modal/menu.php')" value="新增主選單">
                     </td>
                     <td class="cent">
-                        <input type="hidden" name="table" value="Title">
+                        <input type="hidden" name="table" value="Menu">
                         <input type="submit" value="修改確定">
                         <input type="reset" value="重置">
                     </td>

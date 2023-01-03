@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0068)?do=admin&redo=title -->
+﻿<?php include_once "api/base.php"; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0068)?do=title -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -28,39 +29,39 @@
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">後台管理選單</span>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="./Management page_files/Management page.htm">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=title">
 						<div class="mainmu">
 							網站標題管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=ad">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=ad">
 						<div class="mainmu">
 							動態文字廣告管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=mvim">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=mvim">
 						<div class="mainmu">
 							動畫圖片管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=image">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
 						<div class="mainmu">
 							校園映象資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=total">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
 						<div class="mainmu">
 							進站總人數管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=bottom">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=bottom">
 						<div class="mainmu">
 							頁尾版權資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=news">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=news">
 						<div class="mainmu">
 							最新消息資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=admin">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin">
 						<div class="mainmu">
 							管理者帳號管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=menu">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=menu">
 						<div class="mainmu">
 							選單管理 </div>
 					</a>
@@ -85,13 +86,12 @@
 				<?php
 				$do = $_GET['do'] ?? "title";
 				$file = "./back/" . $do . ".php";
-				if (isset($file)) {
+				if (file_exists($file)) {
 					include_once $file;
 				} else {
 					include_once "./back/title.php";
 				}
 				?>
-
 			</div>
 			<div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
 			<script>
