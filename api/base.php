@@ -53,7 +53,7 @@ class DB
         if(isset($arg[1])){
             $sql .= $arg[1];
         }
-        // dd($sql);
+        
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     function find($id){
@@ -64,7 +64,7 @@ class DB
             }else{
                 $sql .= " where `id` = $id";
             }
-        dd($sql);
+            
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
     function del($id){

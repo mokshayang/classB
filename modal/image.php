@@ -10,6 +10,6 @@
         </tr>
     </table>
     <input type="hidden" name="table" value="Image">
-    <input type="reset" value="新增">
-    <input type="submit" value="重置">
+    <input type="submit" value="新增">
+    <input type="reset" value="重置">
 </form>

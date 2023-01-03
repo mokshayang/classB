@@ -21,8 +21,8 @@ dd($_POST);
                             $row['sh']=(isset($_POST['sh']) && $_POST['sh']==$id)?1:0;
                     break;
                     default:
-                    if(isset($_POST['text']) && $empty($_POST['text'])){
-                        $row['text']=$_POST['text'];
+                    if(isset($_POST['text']) && !empty($_POST['text'])){
+                        $row['text']=$_POST['text'][$idx];
                     }
                     $row['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
             }
@@ -36,6 +36,6 @@ if(!empty($Title->find(['sh'=>0]))){
         $Title->save($radio);
     }
 }
-// to("../admin.php?do=".lcfirst($table));
+to("../admin.php?do=".lcfirst($table));
 
 ?>

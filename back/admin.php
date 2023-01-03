@@ -41,7 +41,7 @@
             <tbody>
                 <tr>
                     <td width="200px">
-                        <input type="button" onclick="op('#cover','#cvr','./modal/renew_admin.php')" value="新增最新消息">
+                        <input type="button" onclick="op('#cover','#cvr','./modal/admin.php')" value="新增最新消息">
                     </td>
                     <td class="cent">
                         <input type="hidden" name="table" value="Admin">
