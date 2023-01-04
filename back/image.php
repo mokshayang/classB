@@ -48,14 +48,14 @@
         <div class="cent">
             <?php
             if(($now-1)>0){
-                echo "<a href='?do=$do&p=($now-1)'> < </a>";
+                echo "<a href='?do=$do&p=".($now-1)."'> < </a>";
             }
             for($i=1;$i<=$pages;$i++){
                 $size = ($now == $i )?"24px":"20px";
                 echo "<a href='?do=$do&p=$i'> &nbsp; $i &nbsp; </a>";
             }
             if(($now+1)<=$pages){
-                echo "<a href='?do=$do&p=($now+1)'> > </a>";
+                echo "<a href='?do=$do&p=".($now+1)."'> > </a>";
             }
             ?>
         </div>

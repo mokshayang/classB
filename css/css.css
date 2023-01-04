@@ -162,3 +162,14 @@ input:focus,button:focus
 table{
 	text-align: center;
 }
+.mw{
+	position: absolute;
+	top: 5px;
+	left: 150px;
+	width: 180px;
+	z-index: 10;
+	border-radius: 20px;
+	background-color: #0000ee60;
+	padding: 10px;
+	display:none;
+}
