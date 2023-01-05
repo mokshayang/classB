@@ -69,7 +69,7 @@
 
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
-					<span class="t">進站總人數 :
+					<span class="t">進站總人數 :<?=$total['total']?>
 						</span>
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 		</div>
 		<div style="clear:both;"></div>
 		<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;"></span>
+			<span class="t" style="line-height:123px;"><?=$bottom['bottom']?></span>
 		</div>
 	</div>
 

@@ -23,6 +23,7 @@ class DB
         foreach ($array as $key => $value) {
             $tmp[]="`$key`='$value'";
         }
+       
         return $tmp ;
     }
     function math($math,$col,...$arg){

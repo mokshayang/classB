@@ -21,7 +21,7 @@
 	</div>
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
-	<a title="" href="">
+		<a title="" href="">
 			<div class="ti" style="background:url('upload/'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
@@ -29,11 +29,30 @@
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
-					
+					<?php
+					$mvs = $Menu->all(['parent' => 0, 'sh' => 1]);
+					foreach ($mvs as $mv) {
+						echo "<div class='cent mainmu'>";
+						echo "<a href='{$mv['href']}'>{$mv['name']}</a>";
+						if ($Menu->count(['parent' => $mv['id']])) {
+							$opt = $Menu->all(['parent' => $mv['id']]);
+							echo "<div class='mw'>";
+							foreach ($opt as $op) {
+								echo "<div class='cent mainmu2'>";
+								echo "<a href='{$mv['href']}'>{$mv['name']}</a>";
+								echo "</div>";
+							}
+							echo "</div>";
+						}
+						echo "</div>";
+					}
+
+					?>
+
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
-					<span class="t">進站總人數 :
-						</span>
+					<span class="t">進站總人數 :<?= $total['total'] ?>
+					</span>
 				</div>
 			</div>
 			<?php
@@ -63,18 +82,35 @@
 			</script>
 			<div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
 				<!--右邊-->
-				
+
 				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo('?do=login')">管理登入</button>
-			
-				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo('admin.php')">返回管理</button>
-				
+
+				<!-- <button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo('admin.php')">返回管理</button> -->
+
 				<div style="width:89%; height:480px;" class="dbor">
 					<span class="t botli">校園映象區</span>
-					
-					
+					<style>
+						.ii{
+							width: 150px;
+							height: 103px;
+							border: 3px solid orange;
+							margin: 5px auto;
+							padding: 3px;
+						}
+					</style>
+<div class="cent" onclick="pp()"><img src="./icon/up.jpg" alt=""></div>
+<?php
+$img = $Image->all(['sh'=>1]);
+foreach($img as $id => $im){
+?>
+<div class="cent im" id="ssaa<?=$id?>">
+<img src="./upload/<?=$im['img']?>" class="ii" alt="">
+</div>
+<?php } ?>
+					<div class="cent" onclick="pp()"><img src="./icon/dn.jpg" alt=""></div>
 					<script>
 						var nowpage = 0,
-							num = <?= count($ims) ?>;
+							num = <?=count($img)?>;
 
 						function pp(x) {
 							var s, t;
@@ -92,12 +128,13 @@
 						}
 						pp(1)
 					</script>
+
 				</div>
 			</div>
 		</div>
 		<div style="clear:both;"></div>
 		<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;"></span>
+			<span class="t" style="line-height:123px;"><?= $bottom['bottom'] ?></span>
 		</div>
 	</div>
 
