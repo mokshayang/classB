@@ -21,8 +21,8 @@
 	</div>
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
-		<a title="" href="">
-			<div class="ti" style="background:url('upload/'); background-size:cover;"></div><!--標題-->
+		<a title="<?=$Title->find(['sh'=>1])['text']?>" href="index.php">
+			<div class="ti" style="background:url('upload/<?=$Title->find(['sh'=>1])['img']?>'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
@@ -90,7 +90,7 @@
 				<div style="width:89%; height:480px;" class="dbor">
 					<span class="t botli">校園映象區</span>
 					<style>
-						.ii{
+						.ii {
 							width: 150px;
 							height: 103px;
 							border: 3px solid orange;
@@ -98,19 +98,19 @@
 							padding: 3px;
 						}
 					</style>
-<div class="cent" onclick="pp()"><img src="./icon/up.jpg" alt=""></div>
-<?php
-$img = $Image->all(['sh'=>1]);
-foreach($img as $id => $im){
-?>
-<div class="cent im" id="ssaa<?=$id?>">
-<img src="./upload/<?=$im['img']?>" class="ii" alt="">
-</div>
-<?php } ?>
+					<div class="cent" onclick="pp()"><img src="./icon/up.jpg" alt=""></div>
+					<?php
+					$img = $Image->all(['sh' => 1]);
+					foreach ($img as $id => $im) {
+					?>
+						<div class="cent im" id="ssaa<?= $id ?>">
+							<img src="./upload/<?= $im['img'] ?>" class="ii" alt="">
+						</div>
+					<?php } ?>
 					<div class="cent" onclick="pp()"><img src="./icon/dn.jpg" alt=""></div>
 					<script>
 						var nowpage = 0,
-							num = <?=count($img)?>;
+							num = <?= count($img) ?>;
 
 						function pp(x) {
 							var s, t;
