@@ -1,4 +1,16 @@
+<?php
 
+if(!empty($_POST['acc']) && !empty($_POST['pw'])){
+	$chk=$Admin->find(['acc'=>$_POST['acc'],'pw'=>$_POST['pw']]);
+	if($chk>0){
+		$_SESSION['login']=$chk['acc'];
+		to("./admin.php");
+	}else{
+		echo "<script>alert('帳號密碼錯誤，請重新輸入。')</script>";
+	}
+
+}
+?>
 
 <div class="di" style="height:540px; border:#999 1px solid; width:53.2%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
 	<?php include_once "marquee.php"; ?>
